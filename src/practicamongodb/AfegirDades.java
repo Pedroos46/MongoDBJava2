@@ -5,10 +5,75 @@
  */
 package practicamongodb;
 
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+
 /**
- *
  * @author Roger
+ * Aquesta clase es la encarregada de afergir hobbis, en aquest cas nomes afegim hobbis o creem usuaris RES MES. 
  */
-public class AfegirDades {
+public class AfegirDades extends Thread {
+    //public AfegirDades(){}
     
+    FXMLDocumentController controller = new FXMLDocumentController();
+
+    private final static String HOST = "127.0.0.1";
+    private final static int PORT = 27017;
+    
+    @Override
+    public void run(){    
+        try {
+            MongoClient mongoClient = new MongoClient(HOST, PORT);
+            MongoDatabase db = mongoClient.getDatabase("mongoshell");
+            
+            System.out.println("Connectat a la base de dades. AGAFAR USUARIS. ");
+            
+            MongoCollection<Document> col = db.getCollection("usuaris");
+            MongoCursor<Document> cursor = col.find().iterator();
+            try {            
+                String tempCursor;
+                String[] tempCursor2;
+            MongoCollection<Document> col1 = db.getCollection("usuaris");
+
+            Document doc;
+            doc = new Document("nom", "sergi").append("anys", 45)
+                    .append("telf", "321-654-987");
+            col1.insertOne(doc)
+                    ;
+                while (cursor.hasNext()) {
+                    System.out.println(tempCursor = cursor.next().toJson());
+                    //System.out.println(tempCursor);
+                    
+                    tempCursor2= tempCursor.split(",");
+                    //System.out.println(tempCursor2[1]);
+                    
+                    tempCursor2= tempCursor2[1].split(":");
+                    //System.out.println(tempCursor2[1]);
+                    
+                    tempCursor = tempCursor2[1];
+                    tempCursor = tempCursor.replace("\"", "");
+
+                    //System.out.println(tempCursor);
+
+                    FXMLDocumentController.usuaris.add(tempCursor);
+                    System.out.println("Llista usuaris cargada.");
+                            
+                }
+            } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            
+            } finally {
+                cursor.close();
+            }
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+    }
+
+
 }
+    

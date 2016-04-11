@@ -7,6 +7,7 @@ package practicamongodb;
 
 import java.awt.event.MouseEvent;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -16,6 +17,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
@@ -28,7 +31,8 @@ public class FXMLDocumentController implements Initializable {
     
     static ObservableList<String> usuaris = FXCollections.observableArrayList();
     static ObservableList<String> hobbies = FXCollections.observableArrayList();
-   
+    final ListView lv = new ListView();
+    
     public static String nomSeleccionat;
     
     
@@ -39,9 +43,10 @@ public class FXMLDocumentController implements Initializable {
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Task task = new Task<Void>() {
-            
-        @Override
+        try{
+            Task task = new Task<Void>() {
+
+            @Override
             public Void call() throws Exception {
                 int i = 0;
                 while (true) {
@@ -51,40 +56,49 @@ public class FXMLDocumentController implements Initializable {
                         public void run() {
                             listview_nom.setItems(usuaris);
                             listview_hobbies.setItems(hobbies);
-
                         }
                     });
                 i++;
                 Thread.sleep(1000);
                 }
             }
-        };
+            };
 
-        Thread th = new Thread(task);
-        th.setDaemon(true);
-        th.start();
+            Thread th = new Thread(task);
+            th.setDaemon(true);
+            th.start();
+        }
+        catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
     }  
     
-      
-     //LIST VIEW EVENT
-    @FXML public void handleMouseClick(MouseEvent arg0) {
-        System.out.println("clicked on " + listview_nom.getSelectionModel().getSelectedItem());
-        
-        //onMousePressed="#handleMouseClick"
-    }
-    
-    @FXML //botosimulacre emulacio list view de dalt
+          
+    @FXML //carregar hobbis
     public void handleButtonAction2(ActionEvent event) {
-        CargarllistaHobbies fil2 = new CargarllistaHobbies();
-        if((String)(listview_nom.getSelectionModel().getSelectedItem()) == null){
-            System.out.println("Selecciona un usuari");
-            
-        } else{
-            label_selecciona.setVisible(false);
-            System.out.println("BOTO SIMULACIO DEL LISTVIEW EVENT");
-            nomSeleccionat = (String)(listview_nom.getSelectionModel().getSelectedItem());
+        try{
+            CargarllistaHobbies fil2 = new CargarllistaHobbies();
+            if((String)(listview_nom.getSelectionModel().getSelectedItem()) == null){
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("");
+                alert.setHeaderText(null);
+                alert.setContentText("Selecciona un usuari de la llista per a poder veure els seus hobbies");
+                alert.showAndWait();
+                System.out.println("Selecciona un usuari");
 
-            fil2.start();
+            } else{
+                nomSeleccionat = (String)(listview_nom.getSelectionModel().getSelectedItem());
+                hobbies.removeAll(hobbies);
+
+                fil2.start();
+
+                label_selecciona.setVisible(false);
+                System.out.println("Carregan hobbies.");
+                }
+
+        }
+        catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
     }
     
@@ -92,6 +106,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     public void handleButtonActionAddHobbies(ActionEvent event) {
         System.out.println("Afegir hobbis");
+        
     }
     
      @FXML 

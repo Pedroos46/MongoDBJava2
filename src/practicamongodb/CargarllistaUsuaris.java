@@ -65,12 +65,4 @@ public class CargarllistaUsuaris extends Thread {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
     }
-
-
 }
-
-
-/*Document doc;
-            doc = new Document("nom", "sergi").append("anys", 45)
-                    .append("telf", "321-654-987");
-            col.insertOne(doc);*/
