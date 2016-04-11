@@ -11,6 +11,8 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -43,26 +45,33 @@ public class CargarllistaHobbies extends Thread {
                 String tempCursor;
                 String[] tempCursor2;
 
-                while (cursor.hasNext()) {
-                    System.out.println(tempCursor = cursor.next().toJson());
-                    System.out.println("tempCursor: " + tempCursor);
+                System.out.println(tempCursor = cursor.next().toJson());
+                //System.out.println("tempCursor: " + tempCursor);
                     
-                    tempCursor2= tempCursor.split("\\[");
-                    System.out.println(tempCursor2[1]);
+                tempCursor2= tempCursor.split("\\[");
+                //System.out.println(tempCursor2[1]);
 
-
+                tempCursor = tempCursor2[1];
+                tempCursor = tempCursor.replaceAll("]", "");
+                tempCursor = tempCursor.replaceAll("}", "");
+                tempCursor = tempCursor.replaceAll("\"", "");
+                tempCursor = tempCursor.replaceAll("\\s", "");
+                //System.out.println(tempCursor);
                     
-                    //tempCursor2= tempCursor2[1].split(":");
-                    //System.out.println(tempCursor2[1]);
+                tempCursor2= tempCursor.split(",");
+                //System.out.println(tempCursor2[0]);
+                //System.out.println(tempCursor2[1]);
+                //System.out.println(tempCursor2[2]);
                     
-                    //tempCursor = tempCursor2[1];
-                    //tempCursor = tempCursor.replace("\"", "");
-                    //System.out.println(tempCursor);
+                Collections.addAll(FXMLDocumentController.hobbies, tempCursor2);
 
-                    //FXMLDocumentController.hobbies.add(tempCursor);
-                    //System.out.println("Llista de hobbies cargada.");
-                            
-                }
+                /* AQUEST TAMBÉ FUNCIONARIA!!
+                for(String element : tempCursor2) {
+                    FXMLDocumentController.hobbies.add(element);
+                }*/
+                    
+                System.out.println("Llista de hobbies cargada.");
+
             } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             
@@ -74,6 +83,7 @@ public class CargarllistaHobbies extends Thread {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
     }
+
 
 
 }
