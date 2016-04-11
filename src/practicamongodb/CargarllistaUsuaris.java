@@ -64,5 +64,9 @@ public class CargarllistaUsuaris extends Thread {
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
+         if(!this.isInterrupted()){
+            this.interrupt();
+            System.out.println("FIL ATURAT.");
+        }else{ System.out.println("FIL NO ATURAT.");}
     }
 }
