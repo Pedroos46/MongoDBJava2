@@ -20,7 +20,7 @@
       <Label layoutX="36.0" layoutY="46.0" text="Usuaris:" />
       <Label fx:id="label_selecciona" layoutX="272.0" layoutY="175.0" text="Selecciona un usuari" />
       <Button layoutX="32.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleButtonAction2" text="Carregar usuari." />
-      <Button layoutX="226.0" layoutY="307.0" mnemonicParsing="false" text="Ordenar alfabeticament" />
+      <Button layoutX="226.0"  onAction="#handleButtonOrdenar" layoutY="307.0" mnemonicParsing="false" text="Ordenar alfabeticament" />
       <Label layoutX="32.0" layoutY="342.0" text="Edició:" />
       <Button layoutX="31.0" layoutY="432.0" mnemonicParsing="false" text="Esborra usuari" />
     </children>

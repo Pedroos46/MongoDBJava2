@@ -114,5 +114,33 @@ public class FXMLDocumentController implements Initializable {
         System.out.println("Afegin usuaris a la BD");
         
     }
+    
+    @FXML //carregar hobbis
+    public void handleButtonOrdenar(ActionEvent event) {
+        try{
+            CargarllistaHobbies fil3 = new CargarllistaHobbies();
+            if((String)(listview_nom.getSelectionModel().getSelectedItem()) == null){
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("");
+                alert.setHeaderText(null);
+                alert.setContentText("Selecciona un usuari de la llista per a poder veure els seus hobbies");
+                alert.showAndWait();
+                System.out.println("Selecciona un usuari");
+
+            } else{
+                nomSeleccionat = (String)(listview_nom.getSelectionModel().getSelectedItem());
+                hobbies.removeAll(hobbies);
+
+                fil3.start();
+
+                label_selecciona.setVisible(false);
+                System.out.println("Carregan hobbies.");
+                }
+
+        }
+        catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+    }
  
 }
