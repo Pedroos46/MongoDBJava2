@@ -16,7 +16,7 @@ import org.bson.Document;
  * Aquesta clase es la encarregada de afergir hobbis, en aquest cas nomes afegim hobbis o creem usuaris RES MES. 
  */
 public class AfegirDades extends Thread {
-    //public AfegirDades(){}
+    //public AfegirDades(){} per despres exacutar el fil, declaro classe fil = new classe i despres fil.start
     
     FXMLDocumentController controller = new FXMLDocumentController();
 
@@ -35,12 +35,16 @@ public class AfegirDades extends Thread {
             MongoCursor<Document> cursor = col1.find().iterator();
 
             Document doc;
-            doc = new Document("nom", "sergi").append("hobbis", 45).append("telf", "321-654-987");
+            doc = new Document("nom", "Demo").append("hobbis", "hoquei");
             col1.insertOne(doc);
                
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        if(!this.isInterrupted()){
+            this.interrupt();
+            System.out.println("FIL ATURAT.");
         }
     }
 

@@ -23,6 +23,7 @@ import org.bson.Document;
  *
  * @author Roger
  */
+/*
 public class OrdenarDades extends Thread {
     
     private final static String HOST = "127.0.0.1";
@@ -75,7 +76,7 @@ public class OrdenarDades extends Thread {
                 for(String element : tempCursor2) {
                     FXMLDocumentController.hobbies.add(element);
                 }*/
-                    
+             /*       
                 System.out.println("Llista de hobbies cargada.");
             
             mongoClient.close();
@@ -88,7 +89,7 @@ public class OrdenarDades extends Thread {
             };
 
             col1.find(and(gt("anys", 20), lte("anys", 100))).forEach(printBlock);*/
-           
+           /*
             if(!this.isInterrupted()){
             this.interrupt();
             System.out.println("FIL ATURAT.");
@@ -99,3 +100,4 @@ public class OrdenarDades extends Thread {
     }
     
 }
+*/
