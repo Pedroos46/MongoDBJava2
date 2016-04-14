@@ -34,6 +34,7 @@ public class CargarllistaHobbies extends Thread {
             
             String tempUserCerca = FXMLDocumentController.nomSeleccionat;
             tempUserCerca = tempUserCerca.replaceAll("\\s", "");
+            
             BasicDBObject cerca = new BasicDBObject();
             cerca.put("nom", tempUserCerca);
             
@@ -41,6 +42,7 @@ public class CargarllistaHobbies extends Thread {
 
             MongoCollection<Document> col = db.getCollection("usuaris");
             MongoCursor<Document> cursor = col.find(cerca).iterator();
+            
             try {            
                 String tempCursor;
                 String[] tempCursor2;
@@ -71,7 +73,9 @@ public class CargarllistaHobbies extends Thread {
                 }*/
                     
                 System.out.println("Llista de hobbies cargada.");
-
+            
+            mongoClient.close();
+            
             } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             

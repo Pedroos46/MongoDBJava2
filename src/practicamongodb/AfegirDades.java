@@ -35,7 +35,7 @@ public class AfegirDades extends Thread {
             MongoCursor<Document> cursor = col1.find().iterator();
 
             Document doc;
-            doc = new Document("nom", "sergi").append("anys", 45).append("telf", "321-654-987");
+            doc = new Document("nom", "sergi").append("hobbis", 45).append("telf", "321-654-987");
             col1.insertOne(doc);
                
 
