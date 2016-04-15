@@ -123,7 +123,7 @@ public class FXMLDocumentController implements Initializable {
                 Alert alert = new Alert(AlertType.WARNING);
                 alert.setTitle("");
                 alert.setHeaderText(null);
-                alert.setContentText("Selecciona un usuari de la llista per a poder veure els seus hobbies");
+                alert.setContentText("Selecciona un usuari de la llista per a poder veure els seus hobbies ordenats");
                 alert.showAndWait();
                 System.out.println("Selecciona un usuari");
 

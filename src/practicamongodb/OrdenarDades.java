@@ -48,26 +48,24 @@ public class OrdenarDades extends Thread {
             String[] tempCursor2;
 
             System.out.println(tempCursor = cursor.next().toJson());
-
-            System.out.println("tempCursor: " + tempCursor);
+            //System.out.println("tempCursor: " + tempCursor);
                    
             tempCursor2= tempCursor.split("\\[");
-            System.out.println(tempCursor2[1]);
+            //System.out.println(tempCursor2[1]);
 
             tempCursor = tempCursor2[1];
             tempCursor = tempCursor.replaceAll("]", "");
             tempCursor = tempCursor.replaceAll("}", "");
             tempCursor = tempCursor.replaceAll("\"", "");
             tempCursor = tempCursor.replaceAll("\\s", "");
-            System.out.println(tempCursor);
+            //System.out.println(tempCursor);
                     
             tempCursor2= tempCursor.split(",");
-            System.out.println(tempCursor2[0]);
-            System.out.println(tempCursor2[1]);
-            System.out.println(tempCursor2[2]);
+            //System.out.println(tempCursor2[0]);
+            //System.out.println(tempCursor2[1]);
+            //System.out.println(tempCursor2[2]);
             
             Arrays.sort(tempCursor2);
-            
             Collections.addAll(FXMLDocumentController.hobbies, tempCursor2);
 
                 /* AQUEST TAMBÉ FUNCIONARIA!!
