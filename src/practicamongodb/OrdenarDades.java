@@ -15,7 +15,9 @@ import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.exists;
 import static com.mongodb.client.model.Filters.gt;
 import static com.mongodb.client.model.Filters.lte;
+import static com.mongodb.client.model.Sorts.ascending;
 import static com.mongodb.client.model.Sorts.descending;
+import java.util.Arrays;
 import java.util.Collections;
 import org.bson.Document;
 
@@ -23,7 +25,7 @@ import org.bson.Document;
  *
  * @author Roger
  */
-/*
+
 public class OrdenarDades extends Thread {
     
     private final static String HOST = "127.0.0.1";
@@ -36,63 +38,50 @@ public class OrdenarDades extends Thread {
             MongoDatabase db = mongoClient.getDatabase("mongoshell");
             MongoCollection<Document> col1 = db.getCollection("usuaris");
 
-            Document doc = col1.find(exists("nom")).sort(descending("nom")).first();
-            System.out.println(doc.toJson());
-            
-            
-            BasicDBObject cerca = new BasicDBObject();
-            cerca.put("nom", tempUserCerca);
-            
-            System.out.println(cerca);
+            String tempUserCerca = FXMLDocumentController.nomSeleccionat;
+            tempUserCerca = tempUserCerca.replaceAll("\\s", "");
+            System.out.println("tempUserCerca: " + tempUserCerca);
 
-            MongoCollection<Document> col = db.getCollection("usuaris");
-            MongoCursor<Document> cursor = col.find(cerca).iterator();
+            MongoCursor<Document> cursor = col1.find(exists("hobbis")).sort(ascending("hobbis")).iterator();
+             
+            String tempCursor;
+            String[] tempCursor2;
+
+            System.out.println(tempCursor = cursor.next().toJson());
+
+            System.out.println("tempCursor: " + tempCursor);
+                   
+            tempCursor2= tempCursor.split("\\[");
+            System.out.println(tempCursor2[1]);
+
+            tempCursor = tempCursor2[1];
+            tempCursor = tempCursor.replaceAll("]", "");
+            tempCursor = tempCursor.replaceAll("}", "");
+            tempCursor = tempCursor.replaceAll("\"", "");
+            tempCursor = tempCursor.replaceAll("\\s", "");
+            System.out.println(tempCursor);
+                    
+            tempCursor2= tempCursor.split(",");
+            System.out.println(tempCursor2[0]);
+            System.out.println(tempCursor2[1]);
+            System.out.println(tempCursor2[2]);
             
-            try {            
-                String tempCursor;
-                String[] tempCursor2;
-
-                System.out.println(tempCursor = cursor.next().toJson());
-                //System.out.println("tempCursor: " + tempCursor);
-                    
-                tempCursor2= tempCursor.split("\\[");
-                //System.out.println(tempCursor2[1]);
-
-                tempCursor = tempCursor2[1];
-                tempCursor = tempCursor.replaceAll("]", "");
-                tempCursor = tempCursor.replaceAll("}", "");
-                tempCursor = tempCursor.replaceAll("\"", "");
-                tempCursor = tempCursor.replaceAll("\\s", "");
-                //System.out.println(tempCursor);
-                    
-                tempCursor2= tempCursor.split(",");
-                //System.out.println(tempCursor2[0]);
-                //System.out.println(tempCursor2[1]);
-                //System.out.println(tempCursor2[2]);
-                    
-                Collections.addAll(FXMLDocumentController.hobbies, tempCursor2);
+            Arrays.sort(tempCursor2);
+            
+            Collections.addAll(FXMLDocumentController.hobbies, tempCursor2);
 
                 /* AQUEST TAMBÉ FUNCIONARIA!!
                 for(String element : tempCursor2) {
                     FXMLDocumentController.hobbies.add(element);
                 }*/
-             /*       
-                System.out.println("Llista de hobbies cargada.");
+                    
+            System.out.println("Llista de hobbies cargada.");
             
             mongoClient.close();
-
-            /*Block<Document> printBlock = new Block<Document>() {
-                @Override
-                public void apply(final Document document) {
-                    System.out.println(document.toJson());
-                }
-            };
-
-            col1.find(and(gt("anys", 20), lte("anys", 100))).forEach(printBlock);*/
-           /*
+           
             if(!this.isInterrupted()){
-            this.interrupt();
-            System.out.println("FIL ATURAT.");
+                this.interrupt();
+            System.out.println("FIL ATURAT.");}
             
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -100,4 +89,3 @@ public class OrdenarDades extends Thread {
     }
     
 }
-*/

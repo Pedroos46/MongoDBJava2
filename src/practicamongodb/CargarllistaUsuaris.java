@@ -52,6 +52,7 @@ public class CargarllistaUsuaris extends Thread {
 
                     FXMLDocumentController.usuaris.add(tempCursor);
                     System.out.println("Llista usuaris cargada.");
+                    
                             
                 }
             } catch (Exception e) {
@@ -60,6 +61,8 @@ public class CargarllistaUsuaris extends Thread {
             } finally {
                 cursor.close();
             }
+        
+        mongoClient.close();
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -67,6 +70,7 @@ public class CargarllistaUsuaris extends Thread {
          if(!this.isInterrupted()){
             this.interrupt();
             System.out.println("FIL ATURAT.");
+            
         }else{ System.out.println("FIL NO ATURAT.");}
     }
 }

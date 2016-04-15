@@ -115,10 +115,10 @@ public class FXMLDocumentController implements Initializable {
         
     }
     
-    @FXML //carregar hobbis
+    @FXML //ordenar hobbis
     public void handleButtonOrdenar(ActionEvent event) {
         try{
-            CargarllistaHobbies fil3 = new CargarllistaHobbies();
+            OrdenarDades fil3 = new OrdenarDades();
             if((String)(listview_nom.getSelectionModel().getSelectedItem()) == null){
                 Alert alert = new Alert(AlertType.WARNING);
                 alert.setTitle("");
@@ -132,7 +132,6 @@ public class FXMLDocumentController implements Initializable {
                 hobbies.removeAll(hobbies);
 
                 fil3.start();
-
                 label_selecciona.setVisible(false);
                 System.out.println("Carregan hobbies.");
                 }
