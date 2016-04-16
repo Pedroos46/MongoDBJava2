@@ -21,6 +21,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 
 /**
  *
@@ -34,12 +35,12 @@ public class FXMLDocumentController implements Initializable {
     final ListView lv = new ListView();
     
     public static String nomSeleccionat;
-    
+    public static String text;
     
     @FXML public ListView listview_nom;
     @FXML public ListView listview_hobbies;
     @FXML public Label label_selecciona;
-
+    @FXML public TextField TextField1;
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -105,7 +106,13 @@ public class FXMLDocumentController implements Initializable {
     //AFEGIR USUARI I HOBBIS 
     @FXML
     public void handleButtonActionAddHobbies(ActionEvent event) {
+        nomSeleccionat = (String)(listview_nom.getSelectionModel().getSelectedItem());
         System.out.println("Afegir hobbis");
+        text = TextField1.getText();
+        
+        AfegirDades filAfegir = new AfegirDades();
+         System.out.print("hola");
+        filAfegir.start();
         
     }
     
