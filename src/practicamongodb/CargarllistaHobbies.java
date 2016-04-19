@@ -21,8 +21,8 @@ import java.util.Collections;
 public class CargarllistaHobbies extends Thread {
     public CargarllistaHobbies(){}
     
-    private final static String HOST = "127.0.0.1";
-    private final static int PORT = 27017;
+private final static String HOST = "127.0.0.1";
+private final static int PORT = 27017;
     
     @Override
     public void run(){    

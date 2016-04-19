@@ -6,22 +6,23 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="458.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicamongodb.FXMLDocumentController">
+<AnchorPane id="AnchorPane" fx:id="EsborraUsuari" prefHeight="461.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicamongodb.FXMLDocumentController">
     <children>
-      <Button fx:id="button_hobbies" layoutX="32.0" layoutY="397.0" onAction="#handleButtonActionAddHobbies" text="Afegir hobbie" />
+      <Button fx:id="button_hobbies" layoutX="23.0" layoutY="397.0" onAction="#handleButtonActionAddHobbies" text="Afegir hobbie" />
       <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <Button fx:id="button_users" layoutX="32.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleButtonActionUsers" text="Afegir nom" />
-      <ListView fx:id="listview_nom" layoutX="32.0" layoutY="67.0" prefHeight="233.0" prefWidth="189.0" />
-      <Label layoutX="26.0" layoutY="14.0" text="MongoDB Connector   |   Lector de fitxes" />
-      <Label layoutX="226.0" layoutY="46.0" text="Hobbies:" />
-      <ListView fx:id="listview_hobbies" layoutX="226.0" layoutY="67.0" prefHeight="233.0" prefWidth="200.0" />
-      <TextField fx:id="TextField2" layoutX="113.0" layoutY="363.0" prefHeight="25.0" prefWidth="314.0" />
-      <TextField fx:id="TextField1" layoutX="126.0" layoutY="397.0" prefHeight="25.0" prefWidth="301.0" />
-      <Label layoutX="36.0" layoutY="46.0" text="Usuaris:" />
-      <Label fx:id="label_selecciona" layoutX="272.0" layoutY="175.0" text="Selecciona un usuari" />
-      <Button layoutX="32.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleButtonAction2" text="Carregar usuari." />
-      <Button layoutX="226.0"  onAction="#handleButtonOrdenar" layoutY="307.0" mnemonicParsing="false" text="Ordenar alfabeticament" />
-      <Label layoutX="32.0" layoutY="342.0" text="Edició:" />
-      <Button layoutX="31.0" layoutY="432.0" mnemonicParsing="false" text="Esborra usuari" />
+      <Button fx:id="button_users" layoutX="23.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleButtonActionUsers" text="Afegir usuari" />
+      <ListView fx:id="listview_nom" layoutX="23.0" layoutY="67.0" prefHeight="233.0" prefWidth="192.0" />
+      <Label layoutX="23.0" layoutY="14.0" text="MongoDB Connector" />
+      <Label layoutX="232.0" layoutY="46.0" text="Hobbies:" />
+      <ListView fx:id="listview_hobbies" layoutX="232.0" layoutY="67.0" prefHeight="233.0" prefWidth="200.0" />
+      <TextField fx:id="TextField2" layoutX="112.0" layoutY="363.0" prefHeight="25.0" prefWidth="307.0" />
+      <TextField fx:id="TextField1" layoutX="117.0" layoutY="397.0" prefHeight="25.0" prefWidth="301.0" />
+      <Label layoutX="25.0" layoutY="46.0" text="Usuaris:" />
+      <Label fx:id="label_selecciona" layoutX="278.0" layoutY="175.0" text="Selecciona un usuari" />
+      <Button layoutX="23.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleButtonAction2" text="Carregar usuari" />
+      <Button layoutX="233.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleButtonOrdenar" text="Ordenar alfabeticament" />
+      <Label layoutX="23.0" layoutY="342.0" text="Edició:" />
+      <Button fx:id="Button_Borrar" layoutX="123.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleButtonActionBorrarUsers" text="Esborra usuari" />
+   
     </children>
 </AnchorPane>

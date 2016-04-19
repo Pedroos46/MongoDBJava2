@@ -23,9 +23,9 @@ import javafx.stage.Stage;
  * @author Roger
  */
 public class PracticaMongoDB extends Application {
-    CargarllistaUsuaris fil = new CargarllistaUsuaris();
-
-
+    UsersTempsReal fil2 = new UsersTempsReal();
+    //CargallistaUsuaris fil1 = new CargallistaUsuaris();
+    
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
 
@@ -33,8 +33,8 @@ public class PracticaMongoDB extends Application {
         
         stage.setScene(scene);
         stage.show();
-        
-        fil.start();  
+
+        fil2.start();
 
     }
 

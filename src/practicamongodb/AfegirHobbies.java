@@ -5,48 +5,80 @@
  */
 package practicamongodb;
 
-import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import java.util.Arrays;
-import java.util.Collections;
+import static com.mongodb.client.model.Filters.eq;
+import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
 
 /**
- *
  * @author Roger
+ * Aquesta clase es la encarregada de afergir hobbis, en aquest cas nomes afegim hobbis o creem usuaris RES MES. 
  */
-
-public class OrdenarDades extends Thread {
+public class AfegirHobbies extends Thread {
+    //public AfegirDades(){} per despres exacutar el fil, declaro classe fil = new classe i despres fil.start
     
+    FXMLDocumentController controller = new FXMLDocumentController();
+
     private final static String HOST = "127.0.0.1";
     private final static int PORT = 27017;
-
+    
     @Override
     public void run(){    
         try {
             MongoClient mongoClient = new MongoClient(HOST, PORT);
             MongoDatabase db = mongoClient.getDatabase("mongoshell");
-            MongoCollection<Document> col1 = db.getCollection("usuaris");
-
-            String tempUserCerca = FXMLDocumentController.nomSeleccionat;
-            tempUserCerca = tempUserCerca.replaceAll("\\s", "");
-            System.out.println("tempUserCerca: " + tempUserCerca);
             
-            BasicDBObject cerca = new BasicDBObject();
-            cerca.put("nom", tempUserCerca);
-            System.out.println(cerca);
+            System.out.println("Connectat a la base de dades. CARREGAR USUARIS. ");
+            
+            MongoCollection<Document> col1 = db.getCollection("usuaris");
+            MongoCursor<Document> cursor = col1.find().iterator();
+            
 
-            MongoCursor<Document> cursor = col1.find(cerca).iterator();
-            //exists("hobbis")).sort(ascending("hobbis")
+        //AGAFEM EL NOM
+            String nomSel  = FXMLDocumentController.nomSeleccionat;
+            nomSel = nomSel.replaceAll("\\s", "");
+            System.out.println(nomSel);
+            
+        // ELIMINEM EL USUARI SELECCIONAT
+           DeleteResult resultats2 = col1.deleteMany(eq("nom", nomSel));
+           System.out.println(resultats2.getDeletedCount());
+        
+        //POSEM A LA BD LO QUE VOLEM    
+            Document doc = new Document("nom", nomSel).append("hobbis", FXMLDocumentController.tempArray);
+            col1.insertOne(doc);
+         
+        //CRIDEM EL FIL DE CARREGAR USUARIS
+            CargarllistaHobbies fil2 = new CargarllistaHobbies();
+            fil2.start();
+
+                    
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        
+
+        if(!this.isInterrupted()){
+            this.interrupt();
+            System.out.println("FIL ATURAT.");
+        }
+    }
+
+
+}
+
+
+/*
+
+//RECUPEREM I NETEJEM INFORMACIO DE LA BD
             String tempCursor;
             String[] tempCursor2;
 
             System.out.println(tempCursor = cursor.next().toJson());
             //System.out.println("tempCursor: " + tempCursor);
-                   
+                  
             tempCursor2= tempCursor.split("\\[");
             //System.out.println(tempCursor2[1]);
 
@@ -61,26 +93,15 @@ public class OrdenarDades extends Thread {
             //System.out.println(tempCursor2[0]);
             //System.out.println(tempCursor2[1]);
             //System.out.println(tempCursor2[2]);
-            
-            Arrays.sort(tempCursor2);
+                    
             Collections.addAll(FXMLDocumentController.hobbies, tempCursor2);
 
                 /* AQUEST TAMBÉ FUNCIONARIA!!
                 for(String element : tempCursor2) {
                     FXMLDocumentController.hobbies.add(element);
-                }*/
+                }*//*
                     
             System.out.println("Llista de hobbies cargada.");
             
             mongoClient.close();
-           
-            if(!this.isInterrupted()){
-                this.interrupt();
-            System.out.println("FIL ATURAT.");}
-            
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-        }
-    }
-    
-}
+*/
